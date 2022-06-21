@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 namespace Kurs_DesignPattern_Laboration_3_Vidareutveckla
 {
+    //Product interface
     public interface IWarmDrink
     {
         void Consume();
     }
+    //Concrete Product that implements the Product interface
     internal class Water : IWarmDrink
     {
         public void Consume()
@@ -14,10 +16,34 @@ namespace Kurs_DesignPattern_Laboration_3_Vidareutveckla
             Console.WriteLine("Warm water is served.");
         }
     }
+    internal class Coffee : IWarmDrink
+    {
+        public void Consume()
+        {
+            Console.WriteLine("Coffee is served.");
+        }
+    }
+    internal class Cappuccino : IWarmDrink
+    {
+        public void Consume()
+        {
+            Console.WriteLine("Cappuccino is served.");
+        }
+    }
+    internal class Chocolate : IWarmDrink
+    {
+        public void Consume()
+        {
+            Console.WriteLine("Chocolate is served.");
+        }
+    }
+
+    //Creator, the Factory
     public interface IWarmDrinkFactory
     {
         IWarmDrink Prepare(int total);
     }
+    //Concrete Creator
     internal class HotWaterFactory : IWarmDrinkFactory
     {
         public IWarmDrink Prepare(int total)
@@ -26,6 +52,31 @@ namespace Kurs_DesignPattern_Laboration_3_Vidareutveckla
             return new Water();
         }
     }
+    internal class CoffeeFactory : IWarmDrinkFactory
+    {
+        public IWarmDrink Prepare(int total)
+        {
+            Console.WriteLine($"Pour {total} ml coffee in your cup");
+            return new Coffee();
+        }
+    }
+    internal class CappuccinoFactory : IWarmDrinkFactory
+    {
+        public IWarmDrink Prepare(int total)
+        {
+            Console.WriteLine($"Pour {total} ml cappuccino in your cup");
+            return new Cappuccino();
+        }
+    }
+    internal class ChocolateFactory : IWarmDrinkFactory
+    {
+        public IWarmDrink Prepare(int total)
+        {
+            Console.WriteLine($"Pour {total} ml chocolate in your cup");
+            return new Chocolate();
+        }
+    }
+
     public class WarmDrinkMachine
     {
         public enum AvailableDrink // violates open-closed
